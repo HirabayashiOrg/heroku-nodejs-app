@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-var mongodb = required('mongodb');
+
 const HOST = process.env['heroku.mongodb.host'];
 const PORT = process.env['heroku.mongodb.port'] || 5000;
 const USER = process.env['heroku.mongodb.user'];
