@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const PORT = process.env.heroku_webapp_port || 5000;
+
+console.log(process.env);
 // アプリ生成
 var app = express();
 
