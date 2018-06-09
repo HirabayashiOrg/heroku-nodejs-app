@@ -77,7 +77,7 @@ app.post('/bookmark/register', function(req, res){
 			cc: 0,
 			date: new Date().toFormat('YYYYMMDD_HH24MISS')
 		}, function(err, result){
-			console.log(result);
+			res.send(result);
 		});
 	});
 
