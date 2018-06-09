@@ -1,9 +1,44 @@
-<html>
+<html lang="ja" ng-app="myapp">
 <head>
+	<meta charset="utf-8">
 	<title>Title</title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<script	src="./js/jquery-3.3.1.min.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+	<script src="https://code.angularjs.org/1.7.0/angular.min.js"></script>
 </head>
 <body>
-	<p>Theroku_bx0lvq0g</p>
+	<p>This is users list page.</p>
+	<input type="text" ng-model="name">{{name}}
+	<div ng-controller="MainController">
+		<table class="table table-bordered">
+			<tr class="bg-info"><td>名前</td><td>年齢</td>
+			<tr ng-repeat="user in users|filter:name"><td>{{user.name}}</td><td>{{user.age}}</td></tr>
+		</table>
+		<br/>
+		<table class="table table-bordered">
+			<tr class="bg-info"><td>名前</td><td>年齢</td>
+			<tr ng-repeat="user in users2|filter:name"><td>{{user.name}}</td><td>{{user.age}}</td></tr>
+		</table>
+	</div>
+
+
+	<script>
+	angular.module('myapp', [])
+    .controller('MainController', ['$scope', '$http', function($scope, $http) {
+        $scope.users = [
+            {"name":"ryo", "age": 24},
+            {"name":"emi", "age": 25},
+            {"name":"ru-", "age": 3}
+        ];
+
+        //var $url = 'api/users';
+		$http.get('api/users').success(function(data) {
+			$scope.user2 = data;
+		});
+	}]);
+	</script>
 </body>
 </html>
 

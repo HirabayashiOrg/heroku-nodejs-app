@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ja" ng-app="myapp">
+<head>
+	<meta charset="UTF-8">
+	<title>試験ページ</title>
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="https://code.angularjs.org/1.7.0/angular.min.js"></script>
+	<script src="https://code.angularjs.org/1.3.15/angular-resource.min.js"></script>
+	<script src="https://code.angularjs.org/1.3.15/angular-route.min.js"></script>
+</head>
+<body>
+	<p>ブックマーク（検証）</p>
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="url">URL</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control" name="url" id="url">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2" for="title">タイトル</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control" name="title" id="title">
+			</div>
+			<div class="col-sm-2">
+				<button class="btn btn-info" onClick="register()">登録</button>
+			</div>
+		</div>
+	</div>
+
+
+	<div ng-controller="MainController">
+		<table class="table table-bordered">
+			<tr class="bg-info"><td>
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label for="filter" class="control-label col-sm-2">検索ワード</label>
+						<div class="col-sm-8">
+							<input type="text" name="filter" ng-model="filter" class="form-control">
+						</div>
+					</div>
+				</form>
+			</td></tr>
+			<tr ng-repeat="doc in docs|filter:filter">
+				<td><a ng-href="{{doc.url}}" target="_blank">{{doc.title}}</a><input type="hidden"></td>
+			</tr>
+		</table>
+	</div>
+
+	<script>
+	angular.module('myapp', [])
+		.controller('MainController', ['$scope',function($scope) {
+			$scope.docs = [ <% for (var i = 0; i < docs.length; i++){ %>
+				{
+					'id': '<%= docs[i]._id %>',
+					'title': '<%= docs[i].title %>',
+					'url': '<%= docs[i].url %>',
+					'date': '<%= docs[i].date %>',
+					'cc': '<%= docs[i].cc %>',
+				},
+			<% } %>];
+			$scope.onclick = function(url) {
+				alert(url);
+			};
+		}]);
+	</script>
+	<script>
+		function register(){
+			var url = $('#url').val();
+			var title = $('#title').val();
+			$.post('/bookmark/register',{
+				title: title,
+				url: url,
+			});
+		}
+	</script>
+</body>
+</html>
