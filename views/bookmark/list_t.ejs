@@ -2,6 +2,9 @@
 <html lang="ja" ng-app="myapp">
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<title>ブックマーク</title>
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<script src="/js/jquery-3.3.1.min.js"></script>
@@ -35,7 +38,7 @@
 			<tr class="bg-info"><td>
 				<form class="form-horizontal">
 					<div class="form-group">
-						<label for="filter" class="control-label col-sm-2">検索ワード</label>
+						<label for="filter" class="control-label">検索ワード</label>
 						<div class="col-sm-8">
 							<input type="text" name="filter" ng-model="filter" class="form-control">
 						</div>
@@ -43,7 +46,7 @@
 				</form>
 			</td></tr>
 			<tr ng-repeat="doc in docs|filter:filter">
-				<td><a ng-href="{{doc.url}}" target="_blank">{{doc.title}}</a><input type="hidden"></td>
+				<td><a ng-href="{{doc.url}}" target="_blank">{{doc.title}}</a></td>
 			</tr>
 		</table>
 	</div>
