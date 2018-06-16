@@ -1,15 +1,21 @@
 angular.module('myapp', ['ngStorage'])
 	.controller('myctrl', ['$scope', '$localStorage', function($scope, $localStorage) {
-		$scope.tasks = [
-			{'body': 'task1', 'active':true},
-			{'body': 'task2', 'active':true},
-			{'body': 'task3', 'active':false},
-		];
+		// ストレージをローカルストレージに設定
+		$scope.$strage = $localStorage;
+//		$scope.tasks = [
+//			{'body': 'task1', 'active':true},
+//			{'body': 'task2', 'active':true},
+//			{'body': 'task3', 'active':false},
+//		];
+		// タスク一覧にストレージの内容を反映
+		$scope.tasks = $scope.$strage.tasks || [];
+
 		$scope.add = function(){
 			if($scope.newTask.length!=0){
 				$scope.tasks.push({'body':$scope.newTask, 'active': true});
 				$scope.newTask = '';
 			}
+			$scope.save();
 		};
 		$scope.getCount = function(){
 			var count = 0;
@@ -30,5 +36,9 @@ angular.module('myapp', ['ngStorage'])
 					$scope.tasks.push(task);
 				};
 			});
+			$scope.save();
 		};
+		$scope.save = function(){
+			$scope.$strage.tasks = $scope.tasks;
+		}
 	}]);
