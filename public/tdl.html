@@ -2,6 +2,8 @@
 <html lang="ja" ng-app="myapp">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	<title>ToDoリストの作成</title>
 	<script src="/js/jquery-3.3.1.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
@@ -11,6 +13,7 @@
 	<script src="/js/tdl.js"></script>
 </head>
 <body>
+<div class="container-fluid">
 	<h1 class="text-center">To Doリスト</h1>
 	<div ng-controller="myctrl">
 		<p>残りのタスク：{{getCount()}}</p>
@@ -36,6 +39,7 @@
 			</li>
 		</ul>
 	</div>
+</div>
 </body>
 </html>
 

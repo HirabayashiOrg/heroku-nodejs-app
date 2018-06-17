@@ -105,4 +105,4 @@ app.post('/tdl/update', function(req, res){
 });
 
 //アプリ開始
-app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+app.listen(PORT, () => console.log(`Listening on localhost:${ PORT }`));

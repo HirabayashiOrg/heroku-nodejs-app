@@ -2,11 +2,7 @@ angular.module('myapp', ['ngStorage'])
 	.controller('myctrl', ['$scope', '$localStorage', function($scope, $localStorage) {
 		// ストレージをローカルストレージに設定
 		$scope.$strage = $localStorage;
-//		$scope.tasks = [
-//			{'body': 'task1', 'active':true},
-//			{'body': 'task2', 'active':true},
-//			{'body': 'task3', 'active':false},
-//		];
+
 		// タスク一覧にストレージの内容を反映
 		$scope.tasks = $scope.$strage.tasks || [];
 
