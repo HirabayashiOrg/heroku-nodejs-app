@@ -19,6 +19,14 @@ app.set('view engine', 'ejs');
 app.get('/', function(req, res){
 	res.send('This is Express application !!!');
 });
+
+//***************************
+//** bookmark application
+//***************************
+app.post('/bookmark/add', function(){
+
+});
+
 //***************************
 //** to do list application
 //***************************

@@ -1,0 +1,43 @@
+<!DOCTYPE>
+<html lang="ja" ng-app="myapp">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- アイコンの設定 -->
+	<link rel="shortcut icon" href="/img/tdl.ico" /><!-- ブラウザアイコン用 -->
+	<link rel="apple-touch-icon" href="/img/tdl.ico" /><!-- iPhoneアイコン用 -->
+
+	<title>ブックマーク</title>
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<link href="/css/bootstrap.min.css" rel="stylesheet"></link>
+	<script src="/js/angular.min.js"></script>
+	<script src="/js/angular-resource.js"></script>
+	<script src="/js/bookmark.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<h1 class="text-center">ブックマーク</h1>
+	<div ng-controller="myctrl">
+		<form>
+			<input type="text" ng-model='bookmark'>
+			<button class="btn btn-info" ng-click="add()">追加</button>
+		</form>
+		<br>
+		<ul class="list-inline">
+			<li class="list-group-item" ng-repeat="bookmark in bookmarks">
+				<a href="{{bookmark.url}}" target="_blank">
+					<label>{{bookmark.title}}</label><br/>
+					<img src="http://capture.heartrails.com/180x150/?{{bookmark.url}}"></img>
+				</a>
+			</li>
+		</ul>
+		<pre>{{bookmarks}}</pre>
+	</div>
+</div>
+</body>
+</html>
+
+
+
+
