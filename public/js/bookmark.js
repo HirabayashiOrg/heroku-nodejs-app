@@ -53,6 +53,8 @@ angular.module('myapp', ['ngStorage'])
 					updated : datetime    ,
 					status  : 0
 				});
+				$scope.url = '';
+				$scope.title = '';
 			}
 
 			$scope.save();
