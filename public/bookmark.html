@@ -21,7 +21,7 @@
 <div class="container-fluid">
 	<h1 class="text-center">ブックマーク</h1>
 	<div ng-controller="myctrl">
-		<form class="form-horizontal">
+		<form class="form-horizontal" style="display: none">
 			<div class="form-group">
 				<label class="control-label col-sm-2 col-xs-2">URL</label>
 				<div class="col-sm-6 col-xs-6">
@@ -50,7 +50,12 @@
 				</div>
 			</div>
 		</form>
-		<br>
+		<div class="siimple-switch" >
+			<input type="checkbox" id="mySwitch">
+			<label for="mySwitch"></label>
+			<div></div>
+		</div>
+			<br>
 		<ul class="list-inline">
 			<li class="list-group-item" ng-repeat="bookmark in bookmarks|filter: filter|orderBy:orderKey" ng-click="update(bookmark.url)">
 				<a href="{{bookmark.url}}" target="_blank">
@@ -60,7 +65,9 @@
 				</a>
 			</li>
 		</ul>
+		<!--
 		<pre>{{bookmarks}}</pre>
+		 -->
 	</div>
 
 	<script>
@@ -68,6 +75,11 @@
 		$('span').on({
 			'click':function(){
 				return false;
+			}
+		});
+		$('#mySwitch').on({
+			'click': function(){
+				$('form').slideToggle(500);
 			}
 		});
 	});
