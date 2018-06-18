@@ -4,36 +4,74 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- アイコンの設定 -->
-	<link rel="shortcut icon" href="/img/tdl.ico" /><!-- ブラウザアイコン用 -->
-	<link rel="apple-touch-icon" href="/img/tdl.ico" /><!-- iPhoneアイコン用 -->
+	<link rel="shortcut icon" href="/img/bookmark.ico" /><!-- ブラウザアイコン用 -->
+	<link rel="apple-touch-icon" href="/img/bookmark.ico" /><!-- iPhoneアイコン用 -->
 
 	<title>ブックマーク</title>
 	<script src="/js/jquery-3.3.1.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<link href="/css/bootstrap.min.css" rel="stylesheet"></link>
+	<link href="/css/siimple.css" rel="stylesheet"></link>
 	<script src="/js/angular.min.js"></script>
 	<script src="/js/angular-resource.js"></script>
+	<script src="/js/ngStorage.min.js"></script>
 	<script src="/js/bookmark.js"></script>
 </head>
 <body>
 <div class="container-fluid">
 	<h1 class="text-center">ブックマーク</h1>
 	<div ng-controller="myctrl">
-		<form>
-			<input type="text" ng-model='bookmark'>
-			<button class="btn btn-info" ng-click="add()">追加</button>
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label class="control-label col-sm-2 col-xs-2">URL：</label>
+				<div class="col-sm-6 col-xs-6">
+					<input type="text" ng-model="url" class="form-control">
+				</div>
+				<button class="btn btn-info col-sm-4 col-xs-4" ng-click="getTitle()">タイトル取得</button>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2 col-xs-2">タイトル：</label>
+				<div class="col-sm-6 col-xs-6">
+					<input type="text" ng-model="title" class="form-control">
+				</div>
+				<button class="btn btn-info col-sm-4 col-xs-4" ng-click="add()">登録</button>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2 col-xs-2">検索：</label>
+				<div class="col-sm-6 col-xs-6">
+					<input type="text" ng-model='filter' class="form-control">
+				</div>
+				<div class="col-sm-4 col-xs-4">
+					<select ng-model="orderKey" class="form-control">
+						<option value="-created" selected="selected">登録日</option>
+						<option value="-cc">クリック数</option>
+						<option value="-updated">最終アクセス</option>
+					</select>
+				</div>
+			</div>
 		</form>
 		<br>
 		<ul class="list-inline">
-			<li class="list-group-item" ng-repeat="bookmark in bookmarks">
+			<li class="list-group-item" ng-repeat="bookmark in bookmarks|filter: filter|orderBy:orderKey" ng-click="update(bookmark.url)">
 				<a href="{{bookmark.url}}" target="_blank">
-					<small>{{bookmark.title}}</small><br/>
-					<img src="http://capture.heartrails.com/150x120/?{{bookmark.url}}"></img>
+					<small>{{bookmark.title}}</small>
+					<span class="siimple-close pull-right" ng-click="remove(bookmark.url)"></span><br/>
+					<img src="http://capture.heartrails.com/120x100/?{{bookmark.url}}"></img>
 				</a>
 			</li>
 		</ul>
 		<pre>{{bookmarks}}</pre>
 	</div>
+
+	<script>
+	$(function(){
+		$('span').on({
+			'click':function(){
+				return false;
+			}
+		});
+	});
+	</script>
 </div>
 </body>
 </html>
