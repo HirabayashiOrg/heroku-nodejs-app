@@ -2,7 +2,10 @@ var express = require('express'),
 	app = express();
 var fs = require('fs');
 const PORT = process.env['PORT'] || 5000;
+var MongoClient = require('mongodb').MongoClient;
 
+// 外部ファイルの読込
+var mongo = require('./application/mongodb-ui')
 
 // middleware
 app.use(express.json());
@@ -20,7 +23,8 @@ app.get('/', function(req, res){
 	res.send('This is Express application !!!');
 });
 
-
+// MongoDB UI
+app.get('/mongo/connect', mongo.connect);
 
 //アプリ開始
 app.listen(PORT, () => console.log(`Listening on localhost:${ PORT }`));
