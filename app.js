@@ -25,6 +25,9 @@ app.get('/', function(req, res){
 
 // MongoDB UI
 app.get('/mongo/connect', mongo.connect);
+app.get('/mongo/ui/collections', mongo.collections);
+app.get('/mongo/json/collection/:collection', mongo.collection_json);
+app.get('/mongo/ui/collection/:collection', mongo.collection_ui);
 
 //アプリ開始
 app.listen(PORT, () => console.log(`Listening on localhost:${ PORT }`));

@@ -1,0 +1,9 @@
+<%- include('../header') %>
+
+<div class="list-group">
+	<% for (var i = 0; i < lists.length; i++){ %>
+	<a class="list-group-item" href="/mongo/ui/collection/<%=lists[i] %>"><%=lists[i] %></a>
+	<% } %>
+</div>
+
+<%- include('../footer') %>
