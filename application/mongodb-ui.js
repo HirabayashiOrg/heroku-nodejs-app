@@ -33,7 +33,6 @@ exports.collections = function(req, res){
 				}else{
 					var lists = [];
 					for(let collection of collections){
-						console.log(collection.s.name);
 						lists.push(collection.s.name);
 					}
 					res.render('mongodb/collections', {lists:lists});
@@ -59,7 +58,6 @@ exports.collection_json = function(req, res){
 			// コレクションからドキュメントを取得
 			// 全件取得
 			collection.find().toArray(function(err, items){
-				console.log(items);
 				res.send(items);
 			});
 		}
@@ -81,7 +79,6 @@ exports.collection_ui = function(req, res){
 			// コレクションからドキュメントを取得
 			// 全件取得
 			collection.find().toArray(function(err, items){
-				console.log(items);
 				res.render('mongodb/documents', {items: items});
 			});
 		}
@@ -101,7 +98,6 @@ exports.createCollection = function(req, res){
 			// DB名を指定してDBオブジェクトを取得
 			db = client.db('heroku_bx0lvq0g');
 			var name = req.body.name;
-			console.log(name);
 			collection =  db.collection(name);
 			collection.insert({sample:'sample'});
 			res.redirect('/mongo/ui/collections');

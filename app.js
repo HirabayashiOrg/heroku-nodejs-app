@@ -5,7 +5,8 @@ const PORT = process.env['PORT'] || 5000;
 var MongoClient = require('mongodb').MongoClient;
 
 // 外部ファイルの読込
-var mongo = require('./application/mongodb-ui')
+var      mongo = require('./application/mongodb-ui');
+var ngResource = require('./application/ngResource');
 
 // middleware
 app.use(express.json());
@@ -30,6 +31,11 @@ app.get('/mongo/json/collection/:collection', mongo.collection_json);
 app.get('/mongo/ui/collection/:collection', mongo.collection_ui);
 app.get('/mongo/ui/create.collection', (req, res) => {res.render('mongodb/collection_form')});
 app.post('/mongo/ui/create.collection', mongo.createCollection);
+
+// Lesson ngResource
+app.get('/ngResource/api/users'        , ngResource.lists);
+app.post('/ngResource/api/users'       , ngResource.create);
+app.post('/ngResource/api/users/:id'   , ngResource.del)
 
 //アプリ開始
 app.listen(PORT, () => console.log(`Listening on localhost:${ PORT }`));
