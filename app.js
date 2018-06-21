@@ -28,6 +28,8 @@ app.get('/mongo/connect', mongo.connect);
 app.get('/mongo/ui/collections', mongo.collections);
 app.get('/mongo/json/collection/:collection', mongo.collection_json);
 app.get('/mongo/ui/collection/:collection', mongo.collection_ui);
+app.get('/mongo/ui/create.collection', (req, res) => {res.render('mongodb/collection_form')});
+app.post('/mongo/ui/create.collection', mongo.createCollection);
 
 //アプリ開始
 app.listen(PORT, () => console.log(`Listening on localhost:${ PORT }`));

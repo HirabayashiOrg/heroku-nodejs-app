@@ -89,3 +89,24 @@ exports.collection_ui = function(req, res){
 		client.close();
 	});
 };
+
+exports.createCollection = function(req, res){
+	// 接続先の定義
+	var url = "mongodb://hirabayashi:myy623326@ds153460.mlab.com:53460/heroku_bx0lvq0g";
+	// 接続
+	MongoClient.connect(url, function(err, client){
+		if(err){
+			res.send(err);
+		}else{
+			// DB名を指定してDBオブジェクトを取得
+			db = client.db('heroku_bx0lvq0g');
+			var name = req.body.name;
+			console.log(name);
+			collection =  db.collection(name);
+			collection.insert({sample:'sample'});
+			res.redirect('/mongo/ui/collections');
+		}
+		// DB接続 切断
+		client.close();
+	});
+};

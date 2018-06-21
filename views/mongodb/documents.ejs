@@ -2,8 +2,27 @@
 
 <table class="table table-bordered">
 	<% for (var i = 0; i < items.length; i++){ %>
-	<tr><td><%=JSON.stringify(items[i]) %></td></tr>
+	<tr><td>
+		<div class="row">
+			<div class="col-sm-10">
+				<%=JSON.stringify(items[i]) %>
+			</div>
+			<div class="sol-sm-2">
+				<button class="btn btn-danger btn-delete" value="<%=items[i]._id %>">削除</button>
+			</div>
+		</div>
+	</td></tr>
 	<% } %>
 </table>
+<script>
+$(function(){
+	$('.btn-delete').on({
+		'click': function(){
+			var id = $(this).val();
+			alert(id);
+		}
+	})
+});
+</script>
 
 <%- include('../footer') %>
