@@ -2,7 +2,12 @@
 <html lang="ja" ng-app="myapp">
 <head>
 	<meta charset="UTF-8">
-	<title>ToDoリストの作成</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- アイコンの設定 -->
+	<link rel="shortcut icon" href="/img/tdl.ico" /><!-- ブラウザアイコン用 -->
+	<link rel="apple-touch-icon" href="/img/tdl.ico" /><!-- iPhoneアイコン用 -->
+
+	<title>ToDoリスト</title>
 	<script src="/js/jquery-3.3.1.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 	<link href="/css/bootstrap.min.css" rel="stylesheet"></link>
@@ -11,31 +16,33 @@
 	<script src="/js/tdl.js"></script>
 </head>
 <body>
+<div class="container-fluid">
 	<h1 class="text-center">To Doリスト</h1>
 	<div ng-controller="myctrl">
 		<p>残りのタスク：{{getCount()}}</p>
 		<form class="form-horizontal" ng-submit="add()">
 			<div class="form-group">
-				<div class="col-sm-6">
+				<div class="col-sm-6 col-xs-6">
 					<input type="text" ng-model="newTask" class="form-control">
 				</div>
-				<button type="submit" class="col-sm-3 btn btn-info">追加</button>
-				<span class="col-sm-3 btn btn-danger" ng-click="bulkDelete()">削除</span>
+				<button type="submit" class="col-sm-3 col-xs-3 btn btn-info">追加</button>
+				<span class="col-sm-3 col-xs-3 btn btn-danger" ng-click="bulkDelete()">削除</span>
 			</div>
 		</form>
 		<ul class="list-group">
 			<li class="list-group-item" ng-repeat="task in tasks" ng-class="{active: task.active}" ng-click="tasks[$index].active=!tasks[$index].active">
 				<div class="row">
-					<div class="col-sm-11">
+					<div class="col-sm-11 col-xs-11">
 						<span>{{task.body}}</span>
 					</div>
-					<div class="col-sm-1">
+					<div class="col-sm-1 col-xs-1">
 						<span class="btn btn-danger" ng-click="tasks.splice($index, 1)">削除</span>
 					</div>
 				</div>
 			</li>
 		</ul>
 	</div>
+</div>
 </body>
 </html>
 
