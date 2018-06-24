@@ -23,15 +23,23 @@
 	<table class="table table-bordered table-hover">
 		<thead class="bg-success">
 			<tr>
-				<td>Name</td>
-				<td>Age</td>
+				<td class="col-sm-5">Name</td>
+				<td class="col-sm-5">Age</td>
+				<td class="col-sm-2"></td>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="user in users">
-				<td>{{user.name}}</td>
-				<td>{{user.age}}</td>
-				<td><button class="btn btn-danger" ng-click="del(user._id)">削除</button></td>
+				<td class="col-sm-5">
+					<input type="text" value="{{user.name}}" class="form-control" ng-model="user.name">
+				</td>
+				<td class="col-sm-5">
+					<input type="text" value="{{user.age}}" class="form-control" ng-model="user.age">
+				</td>
+				<td class="col-sm-2">
+					<button class="btn btn-info"   ng-click="edit(user)">編集</button>
+					<button class="btn btn-danger" ng-click=" del(user._id)">削除</button>
+				</td>
 			</tr>
 		</tbody>
 	</table>
@@ -53,6 +61,8 @@
 			<button class="btn btn-primary" ng-click="create()">登録</button>
 		</div>
 	</form>
+	<br><br>
+	<pre>{{result}}</pre>
 </div>
 </body>
 </html>

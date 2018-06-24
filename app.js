@@ -35,7 +35,8 @@ app.post('/mongo/ui/create.collection', mongo.createCollection);
 // Lesson ngResource
 app.get('/ngResource/api/users'        , ngResource.lists);
 app.post('/ngResource/api/users'       , ngResource.create);
-app.post('/ngResource/api/users/:id'   , ngResource.del)
+app.post('/ngResource/api/users/edit'  , ngResource.edit);
+app.post('/ngResource/api/users/:id'   , ngResource.del);
 
 //アプリ開始
 app.listen(PORT, () => console.log(`Listening on localhost:${ PORT }`));

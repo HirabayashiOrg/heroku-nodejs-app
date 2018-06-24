@@ -7,6 +7,11 @@ angular.module('myapp', ['ngResource'])
 			create: {method: 'POST'},
 			   del: {method: 'POST'},
 		});
+		var UserEditer = $resource('/ngResource/api/users/edit',{
+			id: '@id'
+		}, {
+			  edit: {method: 'POST'},
+		});
 		$scope.users = User.get();
 
 		// 新規作成
@@ -21,8 +26,19 @@ angular.module('myapp', ['ngResource'])
 		// 削除
 		$scope.del = function(id){
 			//alert(id);
-			User.del({id: id}, function(result){
-				$scope.users = User.get();
+			for(var i=0; i<$scope.users.length; i++){
+				if($scope.users[i]._id == id){
+					$scope.users.splice(i, 1);
+				}
+			}
+			User.del({id: id}, function(result){});
+		};
+
+		// 編集
+		$scope.edit = function(user){
+			//alert(JSON.stringify(user));
+			UserEditer.edit({user:user}, function(result){
+				$scope.result = result;
 			});
-		}
+		};
 	}]);
