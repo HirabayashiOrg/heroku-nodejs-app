@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html lang="ja" ng-app="myapp">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- アイコンの設定 -->
+	<link rel="shortcut icon" href="/img/index.ico" /><!-- ブラウザアイコン用 -->
+	<link rel="apple-touch-icon" href="/img/index.ico" /><!-- iPhoneアイコン用 -->
+
+	<title>Angural-Resource</title>
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<link href="/css/bootstrap.min.css" rel="stylesheet"></link>
+	<link href="/css/siimple.css" rel="stylesheet"></link>
+	<script src="/js/angular.min.js"></script>
+	<script src="/js/angular-resource.js"></script>
+	<script src="/js/ngStorage.min.js"></script>
+	<script src="/js/ng-resource/page1.js"></script>
+</head>
+<body>
+<div ng-controller="myctrl">
+	<h1 class="text-center">ngResourceの練習</h1>
+	<table class="table table-bordered table-hover">
+		<thead class="bg-success">
+			<tr>
+				<td class="col-sm-5">Name</td>
+				<td class="col-sm-5">Age</td>
+				<td class="col-sm-2"></td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="user in users">
+				<td class="col-sm-5">
+					<input type="text" value="{{user.name}}" class="form-control" ng-model="user.name">
+				</td>
+				<td class="col-sm-5">
+					<input type="text" value="{{user.age}}" class="form-control" ng-model="user.age">
+				</td>
+				<td class="col-sm-2">
+					<button class="btn btn-info"   ng-click="edit(user)">編集</button>
+					<button class="btn btn-danger" ng-click=" del(user._id)">削除</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label for="name" class="col-sm-2 control-label">Name</label>
+			<div class="col-sm-10">
+				<input type="text" ng-model="user.name" class="form-control">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="name" class="col-sm-2 control-label">Age</label>
+			<div class="col-sm-10">
+				<input type="text" ng-model="user.age" class="form-control">
+			</div>
+		</div>
+		<div class="col-sm-offset-2 col-sm-10">
+			<button class="btn btn-primary" ng-click="create()">登録</button>
+		</div>
+	</form>
+	<br><br>
+	<pre>{{result}}</pre>
+</div>
+</body>
+</html>
