@@ -7,11 +7,14 @@ var MongoClient = require('mongodb').MongoClient;
 // 外部ファイルの読込
 var      mongo = require('./application/mongodb-ui');
 var ngResource = require('./application/ngResource');
+var    talkapi = require('./application/talkapi');
+var summaryapi = require('./application/textSummaryAPI');
 
 // middleware
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public/html'));
 
 
 //テンプレートエンジンを使用するための設定
@@ -37,6 +40,14 @@ app.get('/ngResource/api/users'        , ngResource.lists);
 app.post('/ngResource/api/users'       , ngResource.create);
 app.post('/ngResource/api/users/edit'  , ngResource.edit);
 app.post('/ngResource/api/users/:id'   , ngResource.del);
+
+// TalkAPI
+app.get('/talkapi/api/talk', talkapi.talk);
+
+// summaryAPI
+app.get('/summary/', summaryapi.root);
+app.get('/summary/api/summary', summaryapi.summary);
+app.get('/summary/ui/summary' , summaryapi.summary_ui);
 
 //アプリ開始
 app.listen(PORT, () => console.log(`Listening on localhost:${ PORT }`));

@@ -1,0 +1,42 @@
+<!DOCTYPE>
+<html lang="ja" ng-app="myapp">
+<head>
+	<meta charset="UTF-8">
+	<title>TalkAPI</title>
+	<script src="/js/jquery-3.3.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<link href="/css/bootstrap.min.css" rel="stylesheet"></link>
+	<script src="/js/angular.min.js"></script>
+	<script src="/js/ngStorage.min.js"></script>
+	<script src="/js/textSummaryAPI/index.js"></script>
+</head>
+<body>
+<div class="container-fluid" ng-controller="mainCtrl">
+	<h3 class="text-center">リクルートテクノロジーズTalkAPI</h3>
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label for='query' class="control-label col-sm-2">テキスト</label>
+			<div class="col-sm-10">
+				<textarea rows="5" ng-model="text" class="form-control"></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for='query' class="control-label col-sm-2">取得件数</label>
+			<div class="col-sm-10">
+				<input type="text" ng-model="count" class="form-control">
+			</div>
+		</div>
+	</form>
+	<div class="col-sm-offset-2 col-sm-10">
+		<button class="btn btn-info" ng-click="summary()">送信</button>
+	</div>
+	<br/>
+	<br/>
+	<pre>{{reply}}</pre>
+</div>
+</body>
+</html>
+
+
+
+
