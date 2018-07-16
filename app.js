@@ -9,6 +9,7 @@ var      mongo = require('./application/mongodb-ui');
 var ngResource = require('./application/ngResource');
 var    talkapi = require('./application/talkapi');
 var summaryapi = require('./application/textSummaryAPI');
+var     kizAPI = require('./application/kizAPI');
 
 // middleware
 app.use(express.json());
@@ -48,6 +49,11 @@ app.get('/talkapi/api/talk', talkapi.talk);
 app.get('/summary/', summaryapi.root);
 app.get('/summary/api/summary', summaryapi.summary);
 app.get('/summary/ui/summary' , summaryapi.summary_ui);
+
+// kizAPI
+app.get('/kizAPI/ranking/api', kizAPI.rankingAPI);
+app.get('/kizAPI/ranking/ui' , kizAPI.rankingUI);
+app.get('/kizAPI/reration', kizAPI.reration);
 
 //アプリ開始
 app.listen(PORT, () => console.log(`Listening on localhost:${ PORT }`));
