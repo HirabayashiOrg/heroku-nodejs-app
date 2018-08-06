@@ -3,7 +3,7 @@ const HOST = process.env['heroku.mongodb.host'];
 const PORT = process.env['heroku.mongodb.port'] || 5000;
 const USER = process.env['heroku.mongodb.user'];
 const PASS = process.env['heroku.mongodb.password'];
-const DB = process.env['heroku.mongodb.db'];
+const DB   = process.env['heroku.mongodb.db'];
 
 // DB接続URLを定義
 var url = 'mongodb://' + USER + ':' + PASS + '@' + HOST + ':' + PORT + '/' + DB;

@@ -10,6 +10,7 @@ var ngResource = require('./application/ngResource');
 var    talkapi = require('./application/talkapi');
 var summaryapi = require('./application/textSummaryAPI');
 var     kizAPI = require('./application/kizAPI');
+var todo_react = require('./application/todo_react');
 
 // middleware
 app.use(express.json());
@@ -54,6 +55,9 @@ app.get('/summary/ui/summary' , summaryapi.summary_ui);
 app.get('/kizAPI/ranking/api', kizAPI.rankingAPI);
 app.get('/kizAPI/ranking/ui' , kizAPI.rankingUI);
 app.get('/kizAPI/reration', kizAPI.reration);
+
+// ToDoリスト（Reactバージョン）
+app.get('/todo/list/:name', todo_react.list);
 
 //アプリ開始
 app.listen(PORT, () => console.log(`Listening on localhost:${ PORT }`));
