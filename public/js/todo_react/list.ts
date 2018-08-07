@@ -1,6 +1,21 @@
 (() => {
 	var tasks = [];
 
+	function Form(props) {
+		return (
+			<form className="form-horizontal">
+				<div className="form-group">
+					<div className="col-sm-10">
+						<input type="text" className="form-control"/>
+					</div>
+					<div className="col-sm-2">
+						<button className="btn btn-info">登録</button>
+					</div>
+				</div>
+			</form>
+		);
+	}
+
 	function Task(props) {
 		const task = props.task;
 
@@ -83,13 +98,16 @@
 
 		render() {
 			return (
-				<ul className="list-group">
-					<Tasks
-						tasks={this.state.tasks}
-						changeActive={this.changeActive}
-						deleteTask={this.deleteTask}
-					/>
-				</ul>
+				<div className="container">
+					<Form/>
+					<ul className="list-group">
+						<Tasks
+							tasks={this.state.tasks}
+							changeActive={this.changeActive}
+							deleteTask={this.deleteTask}
+						/>
+					</ul>
+				</div>
 			);
 		}
 	}
