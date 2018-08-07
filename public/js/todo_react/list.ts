@@ -1,9 +1,5 @@
 (() => {
-	var tasks = [
-		{id: 0, task: 'task1', active: true},
-		{id: 1, task: 'task2', active: true},
-		{id: 2, task: 'task3', active: false},
-	];
+	var tasks = [];
 
 	function Task(props) {
 		const task = props.task;
@@ -44,6 +40,14 @@
 			};
 			this.changeActive = this.changeActive.bind(this);
 			this.deleteTask = this.deleteTask.bind(this);
+		}
+
+		componentDidMount() {
+			$.getJSON('/todo/api/list', {}).done(function(data) {
+				this.setState({
+					tasks: data
+				});
+			}.bind(this));
 		}
 
 		changeActive(task) {
