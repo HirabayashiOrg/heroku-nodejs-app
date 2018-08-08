@@ -1,8 +1,9 @@
-var express = require('express'),
-	app = express();
-var fs = require('fs');
-const PORT = process.env['PORT'] || 5000;
+var express     = require('express'),
+	app         = express();
+var fs          = require('fs');
+const PORT      = process.env['PORT'] || 5000;
 var MongoClient = require('mongodb').MongoClient;
+var bodyParser  = require('body-parser');
 
 // 外部ファイルの読込
 var      mongo = require('./application/mongodb-ui');
@@ -13,6 +14,7 @@ var     kizAPI = require('./application/kizAPI');
 var todo_react = require('./application/todo_react');
 
 // middleware
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.static(__dirname + '/public'));
@@ -57,10 +59,11 @@ app.get('/kizAPI/ranking/ui' , kizAPI.rankingUI);
 app.get('/kizAPI/reration', kizAPI.reration);
 
 // ToDoリスト（Reactバージョン）
-app.get('/todo/list/:name', todo_react.list);
-app.get('/todo/api/list'  , todo_react.api_list);
-app.post('/todo/api/reg'  , todo_react.api_reg);
-app.post('/todo/api/del'  , todo_react.api_del);
+app.get('/todo/list/:name' , todo_react.list);
+app.get('/todo/api/list'   , todo_react.api_list);
+app.post('/todo/api/reg'   , todo_react.api_reg);
+app.post('/todo/api/del'   , todo_react.api_del);
+app.post('/todo/api/update', todo_react.api_update);
 
 //アプリ開始
 app.listen(PORT, () => console.log(`Listening on localhost:${ PORT }`));

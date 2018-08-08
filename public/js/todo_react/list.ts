@@ -88,8 +88,11 @@
 			}).indexOf(task.id);
 
 			tasks[index].active = !tasks[index].active;
-
-
+			// DB更新
+			$.post('/todo/api/update', tasks[index], function(data) {
+				// 結果確認
+				// alert(JSON.stringify(data));
+			});
 
 			this.setState({
 				tasks: tasks,
@@ -125,6 +128,10 @@
 		register(e) {
 			// イベントキャンセル
 			e.preventDefault();
+			// 文字列が空の場合スキップ
+			if(!e.target.value) {
+				return false;
+			}
 			// タスク一覧をコピー
 			var tasks = this.state.tasks.slice();
 			var now = new Date();

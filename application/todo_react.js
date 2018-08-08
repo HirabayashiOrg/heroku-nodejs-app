@@ -98,14 +98,18 @@ exports.api_update = function(req, res){
 			db = client.db('heroku_bx0lvq0g');
 			// コレクションを指定
 			collection = db.collection("todolist");
-			// 削除対象のIDを取得 ※文字列で取得できるから数値に変換
-			var task = req.body;
-			// タスク削除
+			// 削除対象のIDを取得 ※文字列で取得される ⇒ 論理値は明示的に変換
+			var task = {
+				id: req.body.id,
+				task: req.body.task,
+				active: JSON.parse(req.body.active)
+			};
+			// タスク更新
 			collection.update({id: task.id}, task, function(err, result) {
 				if(err) {
 					res.send(err);
 				} else {
-					res.send(result);
+					res.send(task);
 				}
 			});
 		}
