@@ -3,13 +3,18 @@
 
 	function Form(props) {
 		return (
-			<form className="form-horizontal">
+			<form className="form-horizontal" onSubmit={props.register}>
 				<div className="form-group">
 					<div className="col-sm-10">
-						<input type="text" className="form-control"/>
+						<input type="text"
+								className="form-control"
+								value={props.item}
+								onChange={props.updateItem} />
 					</div>
 					<div className="col-sm-2">
-						<button className="btn btn-info">登録</button>
+						<button className="btn btn-info">
+							登録
+						</button>
 					</div>
 				</div>
 			</form>
@@ -26,8 +31,10 @@
 					<div className="col-sm-10">
 						<span>{props.task.task}</span>
 					</div>
-					<button className="col-sm-2 btn btn-danger pull-right"
-						onClick={(e) => props.deleteTask(task, e)}>削除</button>
+					<div className="col-sm-2">
+						<button className="btn btn-danger pull-right"
+							onClick={(e) => props.deleteTask(task, e)}>削除</button>
+					</div>
 				</div>
 			</li>
 		);
@@ -52,9 +59,12 @@
 			super();
 			this.state = {
 				tasks: tasks,
+				item: '',
 			};
 			this.changeActive = this.changeActive.bind(this);
-			this.deleteTask = this.deleteTask.bind(this);
+			this.deleteTask   = this.deleteTask.bind(this);
+			this.updateItem   = this.updateItem.bind(this);
+			this.register     = this.register.bind(this);
 		}
 
 		componentDidMount() {
@@ -93,13 +103,57 @@
 			this.setState({
 				tasks: tasks
 			});
+			// イベント伝播キャンセル
 			e.stopPropagation();
+		}
+
+		updateItem(e) {
+			this.setState({
+				item: e.target.value
+			});
+		}
+
+		register(e) {
+			// イベントキャンセル
+			e.preventDefault();
+			// タスク一覧をコピー
+			var tasks = this.state.tasks.slice();
+			var now = new Date();
+			// 一意のIDを生成
+			var id = now.getFullYear();
+			id += ("00" + (now.getMonth() + 1) ).slice(-2);
+			id += ("00" + now.getDate()).slice(-2);
+			id += ("00" + now.getHours()).slice(-2);
+			id += ("00" + now.getMinutes()).slice(-2);
+			id += ("00" + now.getSeconds()).slice(-2);
+			id += "_";
+			id += ("0000" + Math.floor(Math.random() * 10000) ).slice(-4);
+			// 登録用のタスクを生成
+			var task = {
+				id    : id,
+				task  : this.state.item,
+				active: true,
+			};
+			// タスクを追加
+			tasks.push(task);
+			this.setState({
+				tasks: tasks,
+				item: '',
+			});
+
+			$.post('/todo/api/reg', task, function(data) {
+				// MongoDBに登録
+			});
 		}
 
 		render() {
 			return (
 				<div className="container">
-					<Form/>
+					<Form
+						item={this.state.item}
+						updateItem={this.updateItem}
+						register={this.register}
+					/>
 					<ul className="list-group">
 						<Tasks
 							tasks={this.state.tasks}

@@ -59,6 +59,7 @@ app.get('/kizAPI/reration', kizAPI.reration);
 // ToDoリスト（Reactバージョン）
 app.get('/todo/list/:name', todo_react.list);
 app.get('/todo/api/list'  , todo_react.api_list);
+app.post('/todo/api/reg'  , todo_react.api_reg);
 
 //アプリ開始
 app.listen(PORT, () => console.log(`Listening on localhost:${ PORT }`));
