@@ -60,6 +60,7 @@ app.get('/kizAPI/reration', kizAPI.reration);
 app.get('/todo/list/:name', todo_react.list);
 app.get('/todo/api/list'  , todo_react.api_list);
 app.post('/todo/api/reg'  , todo_react.api_reg);
+app.post('/todo/api/del'  , todo_react.api_del);
 
 //アプリ開始
 app.listen(PORT, () => console.log(`Listening on localhost:${ PORT }`));

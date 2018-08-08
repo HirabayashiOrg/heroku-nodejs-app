@@ -89,6 +89,8 @@
 
 			tasks[index].active = !tasks[index].active;
 
+
+
 			this.setState({
 				tasks: tasks,
 			});
@@ -102,6 +104,13 @@
 			// タスク一覧をセット
 			this.setState({
 				tasks: tasks
+			});
+			// MongoDBのドキュメント削除
+			$.post('/todo/api/del', {
+				id: task.id
+			}, function(data) {
+				// 削除結果
+				// alert(JSON.stringify(data));
 			});
 			// イベント伝播キャンセル
 			e.stopPropagation();
