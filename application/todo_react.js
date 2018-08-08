@@ -19,9 +19,8 @@ exports.api_list = function(req, res){
 			// コレクションを指定
 			collection = db.collection("todolist");
 			// ドキュメントを取得
-			collection.aggregate([
-				{$project: {_id: 0}}
-			]).toArray((err, docs) => {
+			console.log(req.body);
+			collection.find(req.body).toArray((err, docs) => {
 				res.send(docs);
 			});
 		}
@@ -43,7 +42,12 @@ exports.api_reg = function(req, res){
 			// コレクションを指定
 			collection = db.collection("todolist");
 			// 登録タスク取得
-			var task = req.body;
+			var task = {
+				id    : req.body.id,
+				task  : req.body.task,
+				user  : req.body.user,
+				active: JSON.parse(req.body.active),
+			};
 			// タスク登録
 			collection.insert(task, function(err, result) {
 				if(err) {
@@ -100,9 +104,10 @@ exports.api_update = function(req, res){
 			collection = db.collection("todolist");
 			// 削除対象のIDを取得 ※文字列で取得される ⇒ 論理値は明示的に変換
 			var task = {
-				id: req.body.id,
-				task: req.body.task,
-				active: JSON.parse(req.body.active)
+				id    : req.body.id,
+				task  : req.body.task,
+				user  : req.body.user,
+				active: JSON.parse(req.body.active),
 			};
 			// タスク更新
 			collection.update({id: task.id}, task, function(err, result) {

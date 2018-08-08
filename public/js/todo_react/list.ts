@@ -1,5 +1,7 @@
 (() => {
 	var tasks = [];
+	var path = location.pathname;
+	var user = path.split('/').slice(-1)[0];
 
 	function Form(props) {
 		return (
@@ -68,7 +70,7 @@
 		}
 
 		componentDidMount() {
-			$.getJSON('/todo/api/list', {}).done(function(data) {
+			$.post('/todo/api/list', {user: user}, function(data) {
 				this.setState({
 					tasks: data
 				});
@@ -80,6 +82,7 @@
 				return {
 					id    : task.id,
 					task  : task.task,
+					user  : task.user,
 					active: task.active
 				}
 			});
@@ -129,7 +132,7 @@
 			// イベントキャンセル
 			e.preventDefault();
 			// 文字列が空の場合スキップ
-			if(!e.target.value) {
+			if(!this.state.item) {
 				return false;
 			}
 			// タスク一覧をコピー
@@ -148,6 +151,7 @@
 			var task = {
 				id    : id,
 				task  : this.state.item,
+				user  : user,
 				active: true,
 			};
 			// タスクを追加
